@@ -2,7 +2,7 @@
 -- Supports PostgreSQL and H2
 
 CREATE TABLE IF NOT EXISTS contacts (
-    id              BIGINT AUTO_INCREMENT PRIMARY KEY,
+    id              BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     public_id       VARCHAR(50)  NOT NULL UNIQUE,
     contact_type    VARCHAR(30)  NOT NULL,
     first_name      VARCHAR(100),
@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS contacts (
 );
 
 CREATE TABLE IF NOT EXISTS policies (
-    id                    BIGINT AUTO_INCREMENT PRIMARY KEY,
+    id                    BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     policy_number         VARCHAR(30)    NOT NULL UNIQUE,
     public_id             VARCHAR(50)    NOT NULL UNIQUE,
     product_code          VARCHAR(50)    NOT NULL,
@@ -47,7 +47,7 @@ CREATE TABLE IF NOT EXISTS policies (
 );
 
 CREATE TABLE IF NOT EXISTS claims (
-    id                    BIGINT AUTO_INCREMENT PRIMARY KEY,
+    id                    BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     claim_number          VARCHAR(30)    NOT NULL UNIQUE,
     public_id             VARCHAR(50)    NOT NULL UNIQUE,
     policy_number         VARCHAR(30)    NOT NULL,
@@ -76,7 +76,7 @@ CREATE TABLE IF NOT EXISTS claims (
 );
 
 CREATE TABLE IF NOT EXISTS billing_accounts (
-    id                    BIGINT AUTO_INCREMENT PRIMARY KEY,
+    id                    BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     account_number        VARCHAR(30)    NOT NULL UNIQUE,
     account_name          VARCHAR(200),
     policy_number         VARCHAR(30),
@@ -95,7 +95,7 @@ CREATE TABLE IF NOT EXISTS billing_accounts (
 );
 
 CREATE TABLE IF NOT EXISTS coverages (
-    id                    BIGINT AUTO_INCREMENT PRIMARY KEY,
+    id                    BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     public_id             VARCHAR(50)    NOT NULL UNIQUE,
     policy_number         VARCHAR(30)    NOT NULL,
     coverage_code         VARCHAR(50)    NOT NULL,
@@ -110,7 +110,7 @@ CREATE TABLE IF NOT EXISTS coverages (
 );
 
 CREATE TABLE IF NOT EXISTS exposures (
-    id                    BIGINT AUTO_INCREMENT PRIMARY KEY,
+    id                    BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     public_id             VARCHAR(50)    NOT NULL UNIQUE,
     claim_number          VARCHAR(30)    NOT NULL,
     exposure_type         VARCHAR(100),
@@ -128,7 +128,7 @@ CREATE TABLE IF NOT EXISTS exposures (
 );
 
 CREATE TABLE IF NOT EXISTS invoices (
-    id                    BIGINT AUTO_INCREMENT PRIMARY KEY,
+    id                    BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     invoice_number        VARCHAR(30)    NOT NULL UNIQUE,
     account_number        VARCHAR(30)    NOT NULL,
     policy_number         VARCHAR(30),
@@ -146,7 +146,7 @@ CREATE TABLE IF NOT EXISTS invoices (
 );
 
 CREATE TABLE IF NOT EXISTS payments (
-    id                    BIGINT AUTO_INCREMENT PRIMARY KEY,
+    id                    BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     transaction_id        VARCHAR(50)    NOT NULL UNIQUE,
     account_number        VARCHAR(30)    NOT NULL,
     invoice_number        VARCHAR(30),
@@ -162,7 +162,7 @@ CREATE TABLE IF NOT EXISTS payments (
 );
 
 CREATE TABLE IF NOT EXISTS claim_activities (
-    id                    BIGINT AUTO_INCREMENT PRIMARY KEY,
+    id                    BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     activity_id           VARCHAR(50)    NOT NULL UNIQUE,
     claim_number          VARCHAR(30)    NOT NULL,
     activity_type         VARCHAR(50),
@@ -177,7 +177,7 @@ CREATE TABLE IF NOT EXISTS claim_activities (
 );
 
 CREATE TABLE IF NOT EXISTS agents (
-    id                    BIGINT AUTO_INCREMENT PRIMARY KEY,
+    id                    BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     agent_code            VARCHAR(30)    NOT NULL UNIQUE,
     agent_name            VARCHAR(200)   NOT NULL,
     agency_name           VARCHAR(200),

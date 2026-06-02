@@ -27,7 +27,7 @@ public class GlobalExceptionHandler {
                 "timestamp", LocalDateTime.now().toString(),
                 "status", 400,
                 "error", "Bad Request",
-                "message", ex.getMessage()
+                "message", ex.getMessage() != null ? ex.getMessage() : "Bad request"
         ));
     }
 }
