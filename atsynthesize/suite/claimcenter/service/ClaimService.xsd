@@ -1,0 +1,98 @@
+<?xml version="1.0"?>
+<!--
+  ClaimService.xsd - Full schema for ClaimCenter integration operations.
+  Initial version created by Hari Kanangi
+-->
+<xsd:schema
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns="http://atsynthesize.com/wsi/xsd/claimcenter"
+    targetNamespace="http://atsynthesize.com/wsi/xsd/claimcenter"
+    elementFormDefault="qualified">
+
+  <xsd:element name="FNOLRequest" type="FNOLRequestType" nillable="true"/>
+  <xsd:complexType name="FNOLRequestType">
+    <xsd:sequence>
+      <xsd:element name="policyNumber" type="xsd:string"/>
+      <xsd:element name="lossDate" type="xsd:dateTime"/>
+      <xsd:element name="reportedDate" minOccurs="0" type="xsd:dateTime"/>
+      <xsd:element name="lossCause" type="xsd:string"/>
+      <xsd:element name="lossType" type="xsd:string"/>
+      <xsd:element name="lossDescription" minOccurs="0" type="xsd:string"/>
+      <xsd:element name="lossLocationAddr" minOccurs="0" type="xsd:string"/>
+      <xsd:element name="lossLocationCity" minOccurs="0" type="xsd:string"/>
+      <xsd:element name="lossLocationState" minOccurs="0" type="xsd:string"/>
+      <xsd:element name="lossLocationZip" minOccurs="0" type="xsd:string"/>
+      <xsd:element name="reporterFirstName" type="xsd:string"/>
+      <xsd:element name="reporterLastName" type="xsd:string"/>
+      <xsd:element name="reporterPhone" minOccurs="0" type="xsd:string"/>
+      <xsd:element name="reporterRelation" minOccurs="0" type="xsd:string"/>
+      <xsd:element name="policeReportFiled" type="xsd:boolean"/>
+      <xsd:element name="policeReportNumber" minOccurs="0" type="xsd:string"/>
+      <xsd:element name="estimatedDamage" minOccurs="0" type="xsd:decimal"/>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:element name="FNOLResponse" type="FNOLResponseType" nillable="true"/>
+  <xsd:complexType name="FNOLResponseType">
+    <xsd:sequence>
+      <xsd:element name="claimNumber" type="xsd:string"/>
+      <xsd:element name="claimPublicId" type="xsd:string"/>
+      <xsd:element name="status" type="xsd:string"/>
+      <xsd:element name="assignedAdjuster" minOccurs="0" type="xsd:string"/>
+      <xsd:element name="createdDate" type="xsd:dateTime"/>
+      <xsd:element name="acknowledgement" minOccurs="0" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:element name="ClaimSummary" type="ClaimSummaryType" nillable="true"/>
+  <xsd:complexType name="ClaimSummaryType">
+    <xsd:sequence>
+      <xsd:element name="claimNumber" type="xsd:string"/>
+      <xsd:element name="policyNumber" type="xsd:string"/>
+      <xsd:element name="status" type="xsd:string"/>
+      <xsd:element name="lossDate" type="xsd:dateTime"/>
+      <xsd:element name="lossCause" type="xsd:string"/>
+      <xsd:element name="lossType" type="xsd:string"/>
+      <xsd:element name="totalIncurred" type="xsd:decimal"/>
+      <xsd:element name="totalPaid" type="xsd:decimal"/>
+      <xsd:element name="totalReserves" type="xsd:decimal"/>
+      <xsd:element name="adjusterName" minOccurs="0" type="xsd:string"/>
+      <xsd:element name="exposures" minOccurs="0" maxOccurs="unbounded" type="ExposureType"/>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name="ExposureType">
+    <xsd:sequence>
+      <xsd:element name="exposureType" type="xsd:string"/>
+      <xsd:element name="coverageType" type="xsd:string"/>
+      <xsd:element name="status" type="xsd:string"/>
+      <xsd:element name="claimantName" type="xsd:string"/>
+      <xsd:element name="reserveAmount" type="xsd:decimal"/>
+      <xsd:element name="paidAmount" type="xsd:decimal"/>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name="ReserveType">
+    <xsd:sequence>
+      <xsd:element name="claimNumber" type="xsd:string"/>
+      <xsd:element name="exposureId" minOccurs="0" type="xsd:string"/>
+      <xsd:element name="costType" type="xsd:string"/>
+      <xsd:element name="costCategory" type="xsd:string"/>
+      <xsd:element name="reserveAmount" type="xsd:decimal"/>
+      <xsd:element name="availableAmount" type="xsd:decimal"/>
+      <xsd:element name="status" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name="PaymentType">
+    <xsd:sequence>
+      <xsd:element name="claimNumber" type="xsd:string"/>
+      <xsd:element name="paymentType" type="xsd:string"/>
+      <xsd:element name="costType" type="xsd:string"/>
+      <xsd:element name="amount" type="xsd:decimal"/>
+      <xsd:element name="payeeName" type="xsd:string"/>
+      <xsd:element name="status" type="xsd:string"/>
+      <xsd:element name="checkNumber" minOccurs="0" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

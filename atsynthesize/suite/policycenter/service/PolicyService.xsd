@@ -1,0 +1,117 @@
+<?xml version="1.0"?>
+<!--
+  PolicyService.xsd
+  Full schema for PolicyCenter integration operations.
+  Initial version created by Hari Kanangi
+  Extended for modernization
+-->
+<xsd:schema
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns="http://atsynthesize.com/wsi/xsd/policycenter"
+    targetNamespace="http://atsynthesize.com/wsi/xsd/policycenter"
+    elementFormDefault="qualified">
+
+  <!-- Policy Search -->
+  <xsd:element name="PolicySearchRequest" type="PolicySearchRequestType" nillable="true"/>
+  <xsd:complexType name="PolicySearchRequestType">
+    <xsd:sequence>
+      <xsd:element name="policyNumber" minOccurs="0" nillable="true" type="xsd:string"/>
+      <xsd:element name="insuredName" minOccurs="0" nillable="true" type="xsd:string"/>
+      <xsd:element name="productCode" minOccurs="0" nillable="true" type="xsd:string"/>
+      <xsd:element name="status" minOccurs="0" nillable="true" type="xsd:string"/>
+      <xsd:element name="effectiveDateFrom" minOccurs="0" nillable="true" type="xsd:date"/>
+      <xsd:element name="effectiveDateTo" minOccurs="0" nillable="true" type="xsd:date"/>
+      <xsd:element name="agentCode" minOccurs="0" nillable="true" type="xsd:string"/>
+      <xsd:element name="page" minOccurs="0" nillable="true" type="xsd:int"/>
+      <xsd:element name="pageSize" minOccurs="0" nillable="true" type="xsd:int"/>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <!-- Policy Summary -->
+  <xsd:element name="PolicySummary" type="PolicySummaryType" nillable="true"/>
+  <xsd:complexType name="PolicySummaryType">
+    <xsd:sequence>
+      <xsd:element name="policyNumber" type="xsd:string"/>
+      <xsd:element name="publicId" type="xsd:string"/>
+      <xsd:element name="productCode" type="xsd:string"/>
+      <xsd:element name="productName" minOccurs="0" type="xsd:string"/>
+      <xsd:element name="status" type="xsd:string"/>
+      <xsd:element name="effectiveDate" type="xsd:date"/>
+      <xsd:element name="expirationDate" type="xsd:date"/>
+      <xsd:element name="totalPremium" type="xsd:decimal"/>
+      <xsd:element name="currencyCode" minOccurs="0" type="xsd:string"/>
+      <xsd:element name="primaryInsuredName" type="xsd:string"/>
+      <xsd:element name="agentCode" minOccurs="0" type="xsd:string"/>
+      <xsd:element name="uwCompany" minOccurs="0" type="xsd:string"/>
+      <xsd:element name="termNumber" type="xsd:int"/>
+      <xsd:element name="coverages" minOccurs="0" maxOccurs="unbounded" type="CoverageType"/>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <!-- Coverage -->
+  <xsd:complexType name="CoverageType">
+    <xsd:sequence>
+      <xsd:element name="coverageCode" type="xsd:string"/>
+      <xsd:element name="coverageName" type="xsd:string"/>
+      <xsd:element name="deductible" minOccurs="0" type="xsd:decimal"/>
+      <xsd:element name="limit" minOccurs="0" type="xsd:decimal"/>
+      <xsd:element name="premium" minOccurs="0" type="xsd:decimal"/>
+      <xsd:element name="isRequired" type="xsd:boolean"/>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <!-- Quote Request -->
+  <xsd:element name="QuoteRequest" type="QuoteRequestType" nillable="true"/>
+  <xsd:complexType name="QuoteRequestType">
+    <xsd:sequence>
+      <xsd:element name="productCode" type="xsd:string"/>
+      <xsd:element name="effectiveDate" type="xsd:date"/>
+      <xsd:element name="insuredFirstName" type="xsd:string"/>
+      <xsd:element name="insuredLastName" type="xsd:string"/>
+      <xsd:element name="insuredDOB" minOccurs="0" type="xsd:date"/>
+      <xsd:element name="addressLine1" type="xsd:string"/>
+      <xsd:element name="city" type="xsd:string"/>
+      <xsd:element name="state" type="xsd:string"/>
+      <xsd:element name="postalCode" type="xsd:string"/>
+      <xsd:element name="coverageCodes" minOccurs="0" maxOccurs="unbounded" type="xsd:string"/>
+      <xsd:element name="riskUnits" minOccurs="0" maxOccurs="unbounded" type="RiskUnitType"/>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <!-- Risk Unit -->
+  <xsd:complexType name="RiskUnitType">
+    <xsd:sequence>
+      <xsd:element name="riskType" type="xsd:string"/>
+      <xsd:element name="riskNumber" type="xsd:int"/>
+      <xsd:element name="description" minOccurs="0" type="xsd:string"/>
+      <xsd:element name="locationCode" minOccurs="0" type="xsd:string"/>
+      <xsd:element name="coverages" minOccurs="0" maxOccurs="unbounded" type="CoverageType"/>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <!-- Quote Response -->
+  <xsd:element name="QuoteResponse" type="QuoteResponseType" nillable="true"/>
+  <xsd:complexType name="QuoteResponseType">
+    <xsd:sequence>
+      <xsd:element name="quoteId" type="xsd:string"/>
+      <xsd:element name="status" type="xsd:string"/>
+      <xsd:element name="totalPremium" type="xsd:decimal"/>
+      <xsd:element name="taxes" type="xsd:decimal"/>
+      <xsd:element name="fees" type="xsd:decimal"/>
+      <xsd:element name="grandTotal" type="xsd:decimal"/>
+      <xsd:element name="premiumBreakdowns" minOccurs="0" maxOccurs="unbounded" type="PremiumBreakdownType"/>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <!-- Premium Breakdown -->
+  <xsd:complexType name="PremiumBreakdownType">
+    <xsd:sequence>
+      <xsd:element name="coverageCode" type="xsd:string"/>
+      <xsd:element name="coverageName" type="xsd:string"/>
+      <xsd:element name="basePremium" type="xsd:decimal"/>
+      <xsd:element name="adjustments" type="xsd:decimal"/>
+      <xsd:element name="discounts" type="xsd:decimal"/>
+      <xsd:element name="finalPremium" type="xsd:decimal"/>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

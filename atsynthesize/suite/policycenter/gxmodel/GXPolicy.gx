@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<gx-model type="entity.Policy" xmlns="http://guidewire.com/gx">
+  <includes>
+    <include path="PolicyNumber" type="java.lang.String" propertyInclusionType="NORMAL"/>
+    <include path="PublicID" type="java.lang.String" propertyInclusionType="NORMAL"/>
+    <include path="Product.Code" type="java.lang.String" propertyInclusionType="NORMAL"/>
+    <include path="Product.Name" type="java.lang.String" propertyInclusionType="NORMAL"/>
+    <include path="Status" type="typekey.PolicyStatus" propertyInclusionType="NORMAL"/>
+    <include path="PeriodStart" type="java.util.Date" propertyInclusionType="NORMAL"/>
+    <include path="PeriodEnd" type="java.util.Date" propertyInclusionType="NORMAL"/>
+    <include path="TotalPremiumRPT" type="java.math.BigDecimal" propertyInclusionType="NORMAL"/>
+    <include path="PrimaryInsuredName" type="java.lang.String" propertyInclusionType="NORMAL"/>
+    <include path="ProducerCodeOfRecord.Code" type="java.lang.String" propertyInclusionType="NORMAL"/>
+    <include path="UWCompany.Code" type="java.lang.String" propertyInclusionType="NORMAL"/>
+    <include path="TermNumber" type="java.lang.Integer" propertyInclusionType="NORMAL"/>
+    <include path="CancellationDate" type="java.util.Date" propertyInclusionType="NORMAL"/>
+  </includes>
+</gx-model>

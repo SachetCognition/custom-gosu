@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<gx-model type="entity.Contact" xmlns="http://guidewire.com/gx">
+  <includes>
+    <include path="PublicID" type="java.lang.String" propertyInclusionType="NORMAL"/>
+    <include path="Subtype" type="typekey.Contact" propertyInclusionType="NORMAL"/>
+    <include path="FirstName" type="java.lang.String" propertyInclusionType="NORMAL"/>
+    <include path="LastName" type="java.lang.String" propertyInclusionType="NORMAL"/>
+    <include path="DisplayName" type="java.lang.String" propertyInclusionType="NORMAL"/>
+    <include path="Name" type="java.lang.String" propertyInclusionType="NORMAL"/>
+    <include path="EmailAddress1" type="java.lang.String" propertyInclusionType="NORMAL"/>
+    <include path="WorkPhone" type="java.lang.String" propertyInclusionType="NORMAL"/>
+    <include path="HomePhone" type="java.lang.String" propertyInclusionType="NORMAL"/>
+    <include path="CellPhone" type="java.lang.String" propertyInclusionType="NORMAL"/>
+    <include path="PrimaryAddress.AddressLine1" type="java.lang.String" propertyInclusionType="NORMAL"/>
+    <include path="PrimaryAddress.City" type="java.lang.String" propertyInclusionType="NORMAL"/>
+    <include path="PrimaryAddress.State" type="typekey.State" propertyInclusionType="NORMAL"/>
+    <include path="PrimaryAddress.PostalCode" type="java.lang.String" propertyInclusionType="NORMAL"/>
+    <include path="PrimaryAddress.Country" type="typekey.Country" propertyInclusionType="NORMAL"/>
+  </includes>
+</gx-model>

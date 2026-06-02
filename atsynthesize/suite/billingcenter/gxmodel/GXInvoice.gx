@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<gx-model type="entity.Invoice" xmlns="http://guidewire.com/gx">
+  <includes>
+    <include path="InvoiceNumber" type="java.lang.String" propertyInclusionType="NORMAL"/>
+    <include path="PublicID" type="java.lang.String" propertyInclusionType="NORMAL"/>
+    <include path="InvoiceDate" type="java.util.Date" propertyInclusionType="NORMAL"/>
+    <include path="DueDate" type="java.util.Date" propertyInclusionType="NORMAL"/>
+    <include path="PaidDate" type="java.util.Date" propertyInclusionType="NORMAL"/>
+    <include path="Status" type="typekey.InvoiceStatus" propertyInclusionType="NORMAL"/>
+    <include path="Amount" type="java.math.BigDecimal" propertyInclusionType="NORMAL"/>
+    <include path="PaidAmount" type="java.math.BigDecimal" propertyInclusionType="NORMAL"/>
+    <include path="Unpaid" type="java.math.BigDecimal" propertyInclusionType="NORMAL"/>
+    <include path="InvoiceType" type="typekey.InvoiceType" propertyInclusionType="NORMAL"/>
+  </includes>
+</gx-model>

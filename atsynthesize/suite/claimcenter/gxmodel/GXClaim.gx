@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<gx-model type="entity.Claim" xmlns="http://guidewire.com/gx">
+  <includes>
+    <include path="ClaimNumber" type="java.lang.String" propertyInclusionType="NORMAL"/>
+    <include path="PublicID" type="java.lang.String" propertyInclusionType="NORMAL"/>
+    <include path="Policy.PolicyNumber" type="java.lang.String" propertyInclusionType="NORMAL"/>
+    <include path="State" type="typekey.ClaimState" propertyInclusionType="NORMAL"/>
+    <include path="LossDate" type="java.util.Date" propertyInclusionType="NORMAL"/>
+    <include path="ReportedDate" type="java.util.Date" propertyInclusionType="NORMAL"/>
+    <include path="LossCause" type="typekey.LossCause" propertyInclusionType="NORMAL"/>
+    <include path="LossType" type="typekey.LossType" propertyInclusionType="NORMAL"/>
+    <include path="LossLocation.City" type="java.lang.String" propertyInclusionType="NORMAL"/>
+    <include path="LossLocation.State" type="typekey.State" propertyInclusionType="NORMAL"/>
+    <include path="ClaimantDenorm.DisplayName" type="java.lang.String" propertyInclusionType="NORMAL"/>
+    <include path="AssignedUser.DisplayName" type="java.lang.String" propertyInclusionType="NORMAL"/>
+    <include path="ClaimTier" type="typekey.ClaimTier" propertyInclusionType="NORMAL"/>
+    <include path="LitigationStatus" type="typekey.LitigationStatus" propertyInclusionType="NORMAL"/>
+    <include path="CatastropheNumber" type="java.lang.String" propertyInclusionType="NORMAL"/>
+  </includes>
+</gx-model>

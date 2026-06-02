@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: insurance-suite-db
+    environment:
+      POSTGRES_DB: insurance_suite
+      POSTGRES_USER: insurance_user
+      POSTGRES_PASSWORD: insurance_pass
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./backend/src/main/resources/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql
+      - ./backend/src/main/resources/data.sql:/docker-entrypoint-initdb.d/02-data.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U insurance_user -d insurance_suite"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build: ./backend
+    container_name: insurance-suite-api
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      SPRING_PROFILES_ACTIVE: postgres
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_NAME: insurance_suite
+      DB_USERNAME: insurance_user
+      DB_PASSWORD: insurance_pass
+    ports:
+      - "8080:8080"
+
+volumes:
+  pgdata:
