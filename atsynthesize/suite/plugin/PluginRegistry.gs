@@ -22,16 +22,13 @@ uses gw.util.ILogger
  */
 class PluginRegistry {
 
-  private static var _instance : PluginRegistry
+  private static var _instance : PluginRegistry = new PluginRegistry()
   private var _plugins : Map<String, IIntegrationPlugin> = new HashMap<String, IIntegrationPlugin>()
   private var _logger  : ILogger = Logger.forCategory("Integration.PluginRegistry")
 
   private construct() {}
 
   public static function getInstance() : PluginRegistry {
-    if (_instance == null) {
-      _instance = new PluginRegistry()
-    }
     return _instance
   }
 

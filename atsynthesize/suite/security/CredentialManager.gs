@@ -22,16 +22,13 @@ uses gw.util.ILogger
  */
 class CredentialManager {
 
-  private static var _instance : CredentialManager
+  private static var _instance : CredentialManager = new CredentialManager()
   private var _credentialStore : Map<String, Credential> = new HashMap<String, Credential>()
   private var _logger : ILogger = Logger.forCategory("Integration.Security.CredentialManager")
 
   private construct() {}
 
   public static function getInstance() : CredentialManager {
-    if (_instance == null) {
-      _instance = new CredentialManager()
-    }
     return _instance
   }
 

@@ -22,8 +22,10 @@ class CertificateManager {
   private var _keystoreType     : String as KeystoreType     = "JKS"
   private var _truststorePath   : String as TruststorePath
   private var _truststoreType   : String as TruststoreType   = "JKS"
-  private var _certAlias        : String as CertAlias
-  private var _validateHostname : boolean as ValidateHostname = true
+  private var _keystorePassword   : String as KeystorePassword
+  private var _truststorePassword  : String as TruststorePassword
+  private var _certAlias           : String as CertAlias
+  private var _validateHostname    : boolean as ValidateHostname = true
   private var _logger           : ILogger
 
   construct(pName : String) {
@@ -40,11 +42,17 @@ class CertificateManager {
     if (_keystorePath != null) {
       java.lang.System.setProperty("javax.net.ssl.keyStore", _keystorePath)
       java.lang.System.setProperty("javax.net.ssl.keyStoreType", _keystoreType)
+      if (_keystorePassword != null) {
+        java.lang.System.setProperty("javax.net.ssl.keyStorePassword", _keystorePassword)
+      }
     }
 
     if (_truststorePath != null) {
       java.lang.System.setProperty("javax.net.ssl.trustStore", _truststorePath)
       java.lang.System.setProperty("javax.net.ssl.trustStoreType", _truststoreType)
+      if (_truststorePassword != null) {
+        java.lang.System.setProperty("javax.net.ssl.trustStorePassword", _truststorePassword)
+      }
     }
   }
 
