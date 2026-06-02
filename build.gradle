@@ -1,0 +1,54 @@
+plugins {
+    id 'org.gosu-lang.gosu' version '8.1.2'
+}
+
+repositories {
+    mavenCentral()
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs = ['src/main/java']
+        }
+        gosu {
+            srcDirs = ['src/main/gosu']
+        }
+    }
+    test {
+        java {
+            srcDirs = ['src/test/java']
+        }
+        gosu {
+            srcDirs = ['src/test/gosu']
+        }
+    }
+}
+
+dependencies {
+    implementation group: 'org.gosu-lang.gosu', name: 'gosu-core-api', version: '1.17.5'
+    implementation group: 'org.gosu-lang.gosu', name: 'gosu-core', version: '1.17.5'
+
+    testImplementation 'junit:junit:4.13.2'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.10.2'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.10.2'
+}
+
+test {
+    useJUnitPlatform()
+    jvmArgs '--add-opens', 'java.base/java.lang=ALL-UNNAMED',
+            '--add-opens', 'java.base/java.lang.reflect=ALL-UNNAMED',
+            '--add-opens', 'java.base/java.io=ALL-UNNAMED',
+            '--add-opens', 'java.base/java.util=ALL-UNNAMED'
+}
+
+task demo(type: JavaExec) {
+    description = 'Run the WS-I Integration Framework demo'
+    mainClass = 'atsynthesize.suite.integration.Demo'
+    classpath = sourceSets.main.runtimeClasspath
+}
