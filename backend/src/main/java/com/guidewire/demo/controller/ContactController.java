@@ -2,6 +2,8 @@ package com.guidewire.demo.controller;
 
 import com.guidewire.demo.model.Contact;
 import com.guidewire.demo.service.ContactService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,8 +21,9 @@ public class ContactController {
     }
 
     @GetMapping
-    public List<Contact> list() {
-        return contactService.findAll();
+    public Page<Contact> list(@RequestParam(defaultValue = "0") int page,
+                              @RequestParam(defaultValue = "15") int size) {
+        return contactService.findAll(PageRequest.of(page, size));
     }
 
     @GetMapping("/{publicId}")

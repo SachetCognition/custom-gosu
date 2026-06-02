@@ -2,6 +2,8 @@ package com.guidewire.demo.controller;
 
 import com.guidewire.demo.model.BillingAccount;
 import com.guidewire.demo.service.BillingService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,7 +21,14 @@ public class BillingController {
     }
 
     @GetMapping("/accounts")
-    public List<BillingAccount> list() {
+    public Page<BillingAccount> list(@RequestParam(defaultValue = "0") int page,
+                                      @RequestParam(defaultValue = "15") int size) {
+        return billingService.findAll(PageRequest.of(page, size));
+    }
+
+    @GetMapping("/accounts/search")
+    public List<BillingAccount> search(@RequestParam(required = false) String accountName) {
+        if (accountName != null) return billingService.searchByAccountName(accountName);
         return billingService.findAll();
     }
 

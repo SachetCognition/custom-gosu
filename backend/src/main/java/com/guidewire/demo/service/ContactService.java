@@ -2,6 +2,8 @@ package com.guidewire.demo.service;
 
 import com.guidewire.demo.model.Contact;
 import com.guidewire.demo.repository.ContactRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -19,6 +21,10 @@ public class ContactService {
 
     public List<Contact> findAll() {
         return repository.findAll();
+    }
+
+    public Page<Contact> findAll(Pageable pageable) {
+        return repository.findAll(pageable);
     }
 
     public Optional<Contact> findByPublicId(String publicId) {

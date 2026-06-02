@@ -13,4 +13,5 @@ public interface BillingAccountRepository extends JpaRepository<BillingAccount, 
     List<BillingAccount> findByPolicyNumber(String policyNumber);
     List<BillingAccount> findByDelinquencyStatus(String delinquencyStatus);
     List<BillingAccount> findByStatus(String status);
+    List<BillingAccount> findByAccountNameContainingIgnoreCase(String accountName);
 }

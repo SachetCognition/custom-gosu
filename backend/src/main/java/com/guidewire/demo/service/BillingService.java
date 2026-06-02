@@ -2,6 +2,8 @@ package com.guidewire.demo.service;
 
 import com.guidewire.demo.model.BillingAccount;
 import com.guidewire.demo.repository.BillingAccountRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -19,6 +21,14 @@ public class BillingService {
 
     public List<BillingAccount> findAll() {
         return repository.findAll();
+    }
+
+    public Page<BillingAccount> findAll(Pageable pageable) {
+        return repository.findAll(pageable);
+    }
+
+    public List<BillingAccount> searchByAccountName(String accountName) {
+        return repository.findByAccountNameContainingIgnoreCase(accountName);
     }
 
     public Optional<BillingAccount> findByAccountNumber(String accountNumber) {

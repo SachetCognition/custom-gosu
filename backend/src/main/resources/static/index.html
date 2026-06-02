@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guidewire InsuranceSuite — Demo</title>
+  <link rel="stylesheet" href="css/guidewire.css">
+</head>
+<body>
+
+<!-- Header -->
+<div class="gw-header">
+  <div class="gw-header-logo">
+    <div class="logo-icon">GW</div>
+    <span>Guidewire InsuranceSuite</span>
+  </div>
+  <div class="gw-header-right">
+    <span class="env-badge">DEMO ENVIRONMENT</span>
+    <div class="user-info">
+      <div class="user-avatar">SU</div>
+      <span>Super User</span>
+    </div>
+  </div>
+</div>
+
+<!-- Navigation -->
+<div class="gw-nav">
+  <div class="gw-nav-item active" data-screen="dashboard">
+    <span class="nav-icon">&#9776;</span> Dashboard
+  </div>
+  <div class="gw-nav-item" data-screen="policies">
+    <span class="nav-icon">&#128196;</span> PolicyCenter
+    <span class="nav-badge" id="nav-policy-count">—</span>
+  </div>
+  <div class="gw-nav-item" data-screen="claims">
+    <span class="nav-icon">&#9888;</span> ClaimCenter
+    <span class="nav-badge" id="nav-claim-count">—</span>
+  </div>
+  <div class="gw-nav-item" data-screen="billing">
+    <span class="nav-icon">&#128176;</span> BillingCenter
+    <span class="nav-badge" id="nav-billing-count">—</span>
+  </div>
+  <div class="gw-nav-item" data-screen="contacts">
+    <span class="nav-icon">&#128101;</span> ContactManager
+    <span class="nav-badge" id="nav-contact-count">—</span>
+  </div>
+</div>
+
+<!-- Main Content -->
+<div class="gw-main">
+
+  <!-- ==================== DASHBOARD ==================== -->
+  <div class="gw-screen active" id="screen-dashboard">
+    <div class="gw-page-header">
+      <div>
+        <div class="gw-page-title">InsuranceSuite Dashboard</div>
+        <div class="gw-page-subtitle">Real-time overview of all InsuranceSuite modules</div>
+      </div>
+    </div>
+
+    <div class="gw-kpi-grid" id="dashboard-kpis">
+      <div class="gw-loading"><div class="gw-spinner"></div> Loading dashboard…</div>
+    </div>
+
+    <div class="gw-chart-grid" id="dashboard-charts"></div>
+
+    <div class="gw-card">
+      <div class="gw-card-header"><div class="gw-card-title">Recent Policies</div></div>
+      <div class="gw-table-container">
+        <table class="gw-table" id="dashboard-recent-policies">
+          <thead><tr><th>Policy #</th><th>Product</th><th>Insured</th><th>Status</th><th>Premium</th></tr></thead>
+          <tbody><tr><td colspan="5" class="gw-loading"><div class="gw-spinner"></div></td></tr></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== POLICYCENTER ==================== -->
+  <div class="gw-screen" id="screen-policies">
+    <div class="gw-breadcrumb">
+      <a href="#" onclick="showScreen('dashboard')">Home</a> &rsaquo; PolicyCenter
+    </div>
+
+    <div id="policy-list-view">
+      <div class="gw-page-header">
+        <div>
+          <div class="gw-page-title">PolicyCenter</div>
+          <div class="gw-page-subtitle">Manage and search insurance policies</div>
+        </div>
+      </div>
+
+      <div class="gw-card">
+        <div class="gw-toolbar">
+          <div class="gw-search-box">
+            <span class="search-icon">&#128269;</span>
+            <input type="text" id="policy-search" placeholder="Search by insured name…" onkeydown="if(event.key==='Enter')searchPolicies()">
+          </div>
+          <button class="gw-btn gw-btn-primary" onclick="searchPolicies()">Search</button>
+          <button class="gw-btn" onclick="loadPolicies(0)">Reset</button>
+          <select class="gw-filter-select" id="policy-status-filter" onchange="loadPolicies(0)">
+            <option value="">All Statuses</option>
+            <option value="InForce">InForce</option>
+            <option value="Renewed">Renewed</option>
+            <option value="Cancelled">Cancelled</option>
+            <option value="Expired">Expired</option>
+          </select>
+        </div>
+        <div class="gw-table-container">
+          <table class="gw-table">
+            <thead>
+              <tr>
+                <th>Policy Number</th>
+                <th>Product</th>
+                <th>Insured Name</th>
+                <th>Status</th>
+                <th>Effective Date</th>
+                <th>Expiration Date</th>
+                <th>Premium</th>
+                <th>Agent</th>
+                <th>UW Company</th>
+              </tr>
+            </thead>
+            <tbody id="policy-table-body">
+              <tr><td colspan="9" class="gw-loading"><div class="gw-spinner"></div> Loading policies…</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="gw-pagination" id="policy-pagination"></div>
+      </div>
+    </div>
+
+    <div id="policy-detail-view" class="gw-detail-panel">
+      <div class="gw-back-btn" onclick="hidePolicyDetail()">&#8592; Back to Policy List</div>
+      <div class="gw-page-header">
+        <div class="gw-page-title" id="policy-detail-title">Policy Details</div>
+      </div>
+      <div class="gw-detail-grid" id="policy-detail-content"></div>
+    </div>
+  </div>
+
+  <!-- ==================== CLAIMCENTER ==================== -->
+  <div class="gw-screen" id="screen-claims">
+    <div class="gw-breadcrumb">
+      <a href="#" onclick="showScreen('dashboard')">Home</a> &rsaquo; ClaimCenter
+    </div>
+
+    <div id="claim-list-view">
+      <div class="gw-page-header">
+        <div>
+          <div class="gw-page-title">ClaimCenter</div>
+          <div class="gw-page-subtitle">Track and manage insurance claims</div>
+        </div>
+      </div>
+
+      <div class="gw-card">
+        <div class="gw-toolbar">
+          <div class="gw-search-box">
+            <span class="search-icon">&#128269;</span>
+            <input type="text" id="claim-search" placeholder="Search by claim number or insured…" onkeydown="if(event.key==='Enter')searchClaims()">
+          </div>
+          <button class="gw-btn gw-btn-primary" onclick="searchClaims()">Search</button>
+          <button class="gw-btn" onclick="loadClaims(0)">Reset</button>
+          <select class="gw-filter-select" id="claim-status-filter" onchange="loadClaims(0)">
+            <option value="">All Statuses</option>
+            <option value="Open">Open</option>
+            <option value="Closed">Closed</option>
+          </select>
+        </div>
+        <div class="gw-table-container">
+          <table class="gw-table">
+            <thead>
+              <tr>
+                <th>Claim Number</th>
+                <th>Policy</th>
+                <th>Status</th>
+                <th>Loss Cause</th>
+                <th>Severity</th>
+                <th>Insured</th>
+                <th>Loss Date</th>
+                <th>Incurred</th>
+                <th>Paid</th>
+                <th>Reserves</th>
+              </tr>
+            </thead>
+            <tbody id="claim-table-body">
+              <tr><td colspan="10" class="gw-loading"><div class="gw-spinner"></div> Loading claims…</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="gw-pagination" id="claim-pagination"></div>
+      </div>
+    </div>
+
+    <div id="claim-detail-view" class="gw-detail-panel">
+      <div class="gw-back-btn" onclick="hideClaimDetail()">&#8592; Back to Claim List</div>
+      <div class="gw-page-header">
+        <div class="gw-page-title" id="claim-detail-title">Claim Details</div>
+      </div>
+      <div class="gw-detail-grid" id="claim-detail-content"></div>
+    </div>
+  </div>
+
+  <!-- ==================== BILLINGCENTER ==================== -->
+  <div class="gw-screen" id="screen-billing">
+    <div class="gw-breadcrumb">
+      <a href="#" onclick="showScreen('dashboard')">Home</a> &rsaquo; BillingCenter
+    </div>
+
+    <div id="billing-list-view">
+      <div class="gw-page-header">
+        <div>
+          <div class="gw-page-title">BillingCenter</div>
+          <div class="gw-page-subtitle">Billing accounts, invoices, and payment management</div>
+        </div>
+      </div>
+
+      <div class="gw-card">
+        <div class="gw-toolbar">
+          <div class="gw-search-box">
+            <span class="search-icon">&#128269;</span>
+            <input type="text" id="billing-search" placeholder="Search by account name…" onkeydown="if(event.key==='Enter')searchBilling()">
+          </div>
+          <button class="gw-btn gw-btn-primary" onclick="searchBilling()">Search</button>
+          <button class="gw-btn" onclick="loadBilling(0)">Reset</button>
+          <select class="gw-filter-select" id="billing-filter" onchange="loadBilling(0)">
+            <option value="">All Accounts</option>
+            <option value="delinquent">Delinquent Only</option>
+          </select>
+        </div>
+        <div class="gw-table-container">
+          <table class="gw-table">
+            <thead>
+              <tr>
+                <th>Account #</th>
+                <th>Account Name</th>
+                <th>Policy</th>
+                <th>Status</th>
+                <th>Delinquency</th>
+                <th>Total Billed</th>
+                <th>Total Paid</th>
+                <th>Balance</th>
+                <th>Past Due</th>
+                <th>Billing Plan</th>
+                <th>Payment Plan</th>
+              </tr>
+            </thead>
+            <tbody id="billing-table-body">
+              <tr><td colspan="11" class="gw-loading"><div class="gw-spinner"></div> Loading accounts…</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="gw-pagination" id="billing-pagination"></div>
+      </div>
+    </div>
+
+    <div id="billing-detail-view" class="gw-detail-panel">
+      <div class="gw-back-btn" onclick="hideBillingDetail()">&#8592; Back to Billing List</div>
+      <div class="gw-page-header">
+        <div class="gw-page-title" id="billing-detail-title">Billing Account Details</div>
+      </div>
+      <div class="gw-detail-grid" id="billing-detail-content"></div>
+    </div>
+  </div>
+
+  <!-- ==================== CONTACTMANAGER ==================== -->
+  <div class="gw-screen" id="screen-contacts">
+    <div class="gw-breadcrumb">
+      <a href="#" onclick="showScreen('dashboard')">Home</a> &rsaquo; ContactManager
+    </div>
+
+    <div id="contact-list-view">
+      <div class="gw-page-header">
+        <div>
+          <div class="gw-page-title">ContactManager</div>
+          <div class="gw-page-subtitle">Customer and vendor contact management</div>
+        </div>
+      </div>
+
+      <div class="gw-card">
+        <div class="gw-toolbar">
+          <div class="gw-search-box">
+            <span class="search-icon">&#128269;</span>
+            <input type="text" id="contact-search" placeholder="Search by last name…" onkeydown="if(event.key==='Enter')searchContacts()">
+          </div>
+          <button class="gw-btn gw-btn-primary" onclick="searchContacts()">Search</button>
+          <button class="gw-btn" onclick="loadContacts(0)">Reset</button>
+          <select class="gw-filter-select" id="contact-type-filter" onchange="loadContacts(0)">
+            <option value="">All Types</option>
+            <option value="Person">Person</option>
+            <option value="Company">Company</option>
+          </select>
+        </div>
+        <div class="gw-table-container">
+          <table class="gw-table">
+            <thead>
+              <tr>
+                <th>Public ID</th>
+                <th>Type</th>
+                <th>Display Name</th>
+                <th>Email</th>
+                <th>Work Phone</th>
+                <th>City</th>
+                <th>State</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="contact-table-body">
+              <tr><td colspan="8" class="gw-loading"><div class="gw-spinner"></div> Loading contacts…</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="gw-pagination" id="contact-pagination"></div>
+      </div>
+    </div>
+
+    <div id="contact-detail-view" class="gw-detail-panel">
+      <div class="gw-back-btn" onclick="hideContactDetail()">&#8592; Back to Contact List</div>
+      <div class="gw-page-header">
+        <div class="gw-page-title" id="contact-detail-title">Contact Details</div>
+      </div>
+      <div class="gw-detail-grid" id="contact-detail-content"></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Footer -->
+<div class="gw-footer">
+  Guidewire InsuranceSuite Demo &mdash; Powered by Spring Boot 3.2 &amp; H2/PostgreSQL &mdash; Modernized with Devin AI
+</div>
+
+<script src="js/app.js"></script>
+</body>
+</html>
