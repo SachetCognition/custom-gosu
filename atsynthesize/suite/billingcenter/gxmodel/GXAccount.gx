@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<gx-model type="entity.Account" xmlns="http://guidewire.com/gx">
+  <includes>
+    <include path="AccountNumber" type="java.lang.String" propertyInclusionType="NORMAL"/>
+    <include path="PublicID" type="java.lang.String" propertyInclusionType="NORMAL"/>
+    <include path="AccountName" type="java.lang.String" propertyInclusionType="NORMAL"/>
+    <include path="AccountStatus" type="typekey.AccountStatus" propertyInclusionType="NORMAL"/>
+    <include path="BillingPlan.Name" type="java.lang.String" propertyInclusionType="NORMAL"/>
+    <include path="PaymentPlan.Name" type="java.lang.String" propertyInclusionType="NORMAL"/>
+    <include path="DelinquencyPlan.Name" type="java.lang.String" propertyInclusionType="NORMAL"/>
+    <include path="PrimaryPayer.DisplayName" type="java.lang.String" propertyInclusionType="NORMAL"/>
+    <include path="Currency" type="typekey.Currency" propertyInclusionType="NORMAL"/>
+  </includes>
+</gx-model>

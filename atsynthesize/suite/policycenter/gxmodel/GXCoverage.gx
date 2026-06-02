@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<gx-model type="entity.Coverage" xmlns="http://guidewire.com/gx">
+  <includes>
+    <include path="PublicID" type="java.lang.String" propertyInclusionType="NORMAL"/>
+    <include path="PatternCode" type="java.lang.String" propertyInclusionType="NORMAL"/>
+    <include path="Pattern.Name" type="java.lang.String" propertyInclusionType="NORMAL"/>
+    <include path="EffectiveDate" type="java.util.Date" propertyInclusionType="NORMAL"/>
+    <include path="ExpirationDate" type="java.util.Date" propertyInclusionType="NORMAL"/>
+  </includes>
+</gx-model>

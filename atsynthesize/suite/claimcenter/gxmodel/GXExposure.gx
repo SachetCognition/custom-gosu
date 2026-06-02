@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<gx-model type="entity.Exposure" xmlns="http://guidewire.com/gx">
+  <includes>
+    <include path="PublicID" type="java.lang.String" propertyInclusionType="NORMAL"/>
+    <include path="ExposureType" type="typekey.ExposureType" propertyInclusionType="NORMAL"/>
+    <include path="PrimaryCoverage" type="typekey.CoverageType" propertyInclusionType="NORMAL"/>
+    <include path="State" type="typekey.ExposureState" propertyInclusionType="NORMAL"/>
+    <include path="Claimant.DisplayName" type="java.lang.String" propertyInclusionType="NORMAL"/>
+    <include path="LossParty" type="typekey.LossPartyType" propertyInclusionType="NORMAL"/>
+    <include path="AssignedUser.DisplayName" type="java.lang.String" propertyInclusionType="NORMAL"/>
+    <include path="Segment" type="typekey.ClaimSegment" propertyInclusionType="NORMAL"/>
+  </includes>
+</gx-model>
